@@ -4,11 +4,16 @@ import Search from "./Search";
 import AddTransactionForm from "./AddTransactionForm";
 
 function AccountContainer() {
+
+  const [transactionsData, setTransactionsData] = React.useState([])
+
+  // console.log('transactionsData', transactionsData);
+
   return (
     <div>
       <Search />
-      <AddTransactionForm />
-      <TransactionsList />
+      <AddTransactionForm setTransactionsData={setTransactionsData}/>
+      <TransactionsList transactionsData={transactionsData}/>
     </div>
   );
 }
