@@ -1,39 +1,32 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 
-function AddTransactionForm({ setTransactionsData }) {
-
- const [state, setState] = useState({
-  date: '',
-  description: '',
-  category: '',
-  amount: '',
- });
-
-const handleChange = (e) => {
-  e.preventDefault();
-  const name = e.target.name;
-  const value = e.target.value;
-  setState({...state,[name]: value })
-}
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  setTransactionsData(transactionsData => [...transactionsData, state]);
-  setState({
-    date: '', description: '', category: '', amount: '',
-  })
-}
-
-
-
+function AddTransactionForm({onSubmission}) {
+  const [formData, setFormData] = useState({
+    date: "",
+    description: "",
+    category:"",
+    amount:null
+  });
+  function handleChange(event){
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  }
+  function handleSubmit(event){
+    event.preventDefault()
+    onSubmission(formData)
+    
+     
+  }
   return (
     <div className="ui segment">
-      <form onSubmit={handleSubmit} className="ui form">
+      <form onSubmit={handleSubmit} onChange={handleChange} className="ui form">
         <div className="inline fields">
-          <input type="date" name="date" value={ state.date } onChange={ handleChange }/>
-          <input type="text" name="description" placeholder="Description" value={ state.description } onChange={ handleChange }/>
-          <input type="text" name="category" placeholder="Category" value={ state.category } onChange={ handleChange }/>
-          <input type="number" name="amount" placeholder="Amount" step="0.01" value={ state.amount } onChange={ handleChange }/>
+          <input onChange={handleChange} type="date" name="date" />
+          <input onChange={handleChange} type="text" name="description" placeholder="Description" />
+          <input onChange={handleChange}type="text" name="category" placeholder="Category" />
+          <input type="number" name="amount" placeholder="Amount" step="0.01" />
         </div>
         <button className="ui button" type="submit">
           Add Transaction

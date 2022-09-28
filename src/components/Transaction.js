@@ -1,22 +1,22 @@
+
+
 import React from "react";
 
-
-
-function Transaction({ transactionsData }) {
-  // console.log("TansactionsData", transactionsData);
-
-  const data = transactionsData.map((transaction, index) => {
-    return (
-      <tr key={index}>
-        <td>{transaction.date}</td>
-        <td>{transaction.description}</td>
-        <td>{transaction.category}</td>
-        <td>{transaction.amount}</td>
-      </tr>
-    );
-  });
-
-  return data;
+function Transaction({date,description,category,amount,id,onDeleteKey}) {
+  function deleteTransaction(event){
+    
+    onDeleteKey(event.target.id)
+  
+  }
+  return (
+    <tr>
+      <td>{date}</td>
+      <td>{description}</td>
+      <td>{category}</td>
+      <td>{amount}</td>
+      <td><button id={id} onClick={deleteTransaction}>Delete</button></td>
+    </tr>
+  );
 }
 
 export default Transaction;

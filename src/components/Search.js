@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-function Search({ searchingFn }) {
-	const [search, setSearch] = useState("");
-    //state variable, setter function
-	function handleChange(e) {
-		setSearch(e.target.value);
-		searchingFn(search);
-	}
-	return (
-		<div className="ui large fluid icon input">
-			<input
-				value={search}
-				type="text"
-				placeholder="Search your Recent Transactions"
-				onChange={handleChange}
-			/>
-			<i className="circular search link icon"></i>
-		</div>
-	);
+import React,{useState} from "react";
+
+function Search({onUserSearch}) {
+  const [search,setsearch] = useState(" ")
+  function handleChange(event){
+   setsearch(event.target.value)
+    onUserSearch(search)
+  }
+ return (
+   <div className="ui large fluid icon input">
+     <input 
+      onChange={handleChange} 
+       type="text"
+       placeholder="Search your Recent Transactions"
+        
+     />
+     <i onClick={handleChange} className="circular search link icon"></i>
+   </div>
+ );
 }
 export default Search;
